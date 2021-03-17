@@ -1,0 +1,3 @@
+[submodule "darknet_ros/libs/darknet"]
+	path = darknet_ros/deps/darknet
+	url = https://github.com/AlexeyAB/darknet.git
