@@ -57,5 +57,6 @@ target_compile_features(object_detector PRIVATE cxx_std_17)
 ament_target_dependencies(object_detector PUBLIC ${ament_deps})
 
 install(TARGETS object_detector DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 
 ament_package()

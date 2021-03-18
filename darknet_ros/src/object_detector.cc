@@ -118,6 +118,7 @@ class ObjectDetector : public rclcpp::Node {
 
 void ObjectDetector::handle_image(const sensor_msgs::msg::Image::ConstSharedPtr& msg) {
   cv_bridge::CvImagePtr cv_ptr;
+  auto received_time = this->get_clock()->now();
   try {
     cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
   } catch (cv_bridge::Exception& e) {
@@ -135,6 +136,7 @@ void ObjectDetector::handle_image(const sensor_msgs::msg::Image::ConstSharedPtr&
   // Publish the bounding boxes
   auto bbox_msg           = perception_interfaces::msg::BoundingBoxes{};
   bbox_msg.header         = msg->header;
+  bbox_msg.header.stamp   = received_time;
   bbox_msg.height         = msg->height;
   bbox_msg.width          = msg->width;
   bbox_msg.bounding_boxes = std::move(bboxes);
